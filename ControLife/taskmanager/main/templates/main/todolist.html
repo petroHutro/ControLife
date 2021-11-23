@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="alert alert-light" role="alert">
+        <h1>{{now}} <a href="{% url 'main:change_week' %}" class="btn btn-light" role="button">Change</a></h1>
+        {% for d in day %}
+        {% if d.task.all %}
+            {% for el in d.task.all|dictsort:"time" %}
+                <div class="alert alert-secondary" role="alert">
+                    <h4>{{ el.name }}</h4>
+                    <p>{{ el.time }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Nothing planned for today</p>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="alert alert-light" role="alert">
+        <h1>List</h1>
+        {% if task %}
+            {% for el in task|dictsort:"data" %}
+                    <div class="alert alert-secondary" role="alert">
+                        <h3>{{ el.task.name }} <a href="{% url 'main:dell_list' el.id el.task.id %}"><img src="{% static 'main/img/dell.svg' %}" alt="Dell"></a></h3>
+                        <hr>
+                        <p>{{ el.data }} {{ el.task.time }}</p>
+                    </div>
+            {% endfor %}
+        {% else %}
+            <p>The list is empty</p>
+        {% endif %}
+        <center><a href="{% url 'main:create_list' %}" class="btn btn-light" role="button">+</a></center>
+    </div>
+{% endblock %}

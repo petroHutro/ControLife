@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+    Creating a Task
+{% endblock %}
+
+{% block content %}
+    <h1>Creating a Task</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label  class="form-label">Task:</label>
+        <div class="mb-3">
+            {{ form.name }}
+        </div>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{% static 'main/css/tpicker.css' %}">
+        <script type="text/javascript" src="{% static 'main/js/tpicker.js' %}"></script>
+        <label  class="form-label">Time:</label>
+        <div class="mb-3">
+            {{ form.time }}
+            <button type="button" class="btn btn-primary" onclick="showpickers('timepkr',24)" style="width:40px;float:left;">
+                <i class="fa fa-clock-o"></i>
+            </button>
+            <div class="timepicker"></div>
+            <span>{{ error }}</span>
+            <button type="submit" class="btn btn-success">Add</button>
+        </div>
+    </form>
+{% endblock %}

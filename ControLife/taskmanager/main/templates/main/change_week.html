@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>Расписание <a href="{% url 'main:timetable' %}" class="btn btn-secondary" role="button">Ready</a></h1>
+    <table class="table">
+        <thead>
+            <tr>
+                {% for day in week_n %}
+                    <th scope="col">{{day}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for i in  week %}
+                <td>
+                    {% if i %}
+                        {% for mo in i %}
+                            {% for el in mo.task.all %}
+                                <p>{{ el.name }} <a href="{% url 'main:dell_task' mo.id el.id %}"><img src="{% static 'main/img/dell.svg' %}" alt="Dell"></a></p>
+                            {% endfor %}
+                            <center><a href="{% url 'main:add_task_week' mo.id %}"><img src="{% static 'main/img/add.svg' %}" alt="Add"></a></center>
+                        {% endfor %}
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

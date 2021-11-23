@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    {% if d %}
+        <div class="alert alert-secondary" role="alert">
+            <h3>{{ d.name }}</h3>
+            <p>{{ d.start }}</p>
+            <p>{{ d.planed }}</p>
+            <hr>
+            {% for t in d.task.all %}
+            <p>{{ t.name }} <a href="{% url 'main:dell_purpose' d.id t.id %}"><img src="{% static 'main/img/dell.svg' %}" alt="Dell"></a></p>
+            {% endfor %}
+           <a href="{% url 'main:add_task_purpose' d.id %}"><img src="{% static 'main/img/add.svg' %}" alt="Add"></a>
+        </div>
+    {% else %}
+        <p>Free <3</p>
+    {% endif %}
+    <a href="{% url 'main:purpose' %}" class="btn btn-success" role="button">Purpose</a>
+{% endblock %}

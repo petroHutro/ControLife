@@ -1,0 +1,6 @@
+{% extends 'main/add_task.html' %}
+
+{% block list %}
+    <input type="text" name="data"  size="10" required="" id="id_data">
+    <a href="{% url 'main:list' %}" class="btn btn-success" role="button">List</a>
+{% endblock %}

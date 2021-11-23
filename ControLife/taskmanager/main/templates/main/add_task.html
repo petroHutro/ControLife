@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <label class="form-label">Task:</label>
+        <div class="mb-3">
+            <select multiple id="task" name="task">
+                {% for el in task %}
+                    <option value="{{ el.id }}">{{ el.name }} {{ el.time}}</option>
+                {% endfor %}
+            </select>
+            <a href="{% url 'main:create_task' %}" ><img src="{% static 'main/img/add.svg' %}" alt="Add"></a>
+        </div>
+        <button type="submit" class="btn btn-success">Add</button>
+        {% block list %}{% endblock %}
+    </form>
+{% endblock %}

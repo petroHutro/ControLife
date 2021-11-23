@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+    Creating a Task
+{% endblock %}
+
+{% block content %}
+    <h1>Creating a Task</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label  class="form-label">Task:</label>
+            {{ form.task }}
+            <a href="{% url 'main:create_task' %}"><img src="{% static 'main/img/add.svg' %}" alt="Add"></a>
+        </div>
+        <div class="mb-3">
+            <label  class="form-label">Data:</label>
+            {{ form.data }}
+        </div>
+        <p><span>{{ error }}</span></p>
+        <button type="submit" class="btn btn-success">Добавить</button>
+        <a href="{% url 'main:list' %}" class="btn btn-success" role="button">List</a>
+    </form>
+{% endblock %}

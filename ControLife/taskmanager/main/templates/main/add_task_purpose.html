@@ -1,0 +1,5 @@
+{% extends 'main/add_task.html' %}
+
+{% block list %}
+   <a href="{% url 'main:change_purpose' id%}" class="btn btn-success" role="button">Purpose</a>
+{% endblock %}

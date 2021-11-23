@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="alert alert-light" role="alert">
+        <h1>Purpose</h1>
+        {% if cel %}
+            {% for el in cel %}
+                <div class="alert alert-secondary" role="alert">
+                    <h3>{{ el.name }} <a href="{% url 'main:change_purpose' el.id %}" class="btn btn-secondary" role="button">Change</a></h3>
+                    <p>Start: {{ el.start }}</p>
+                    <p>Plan to finish: {{ el.planed }}</p>
+                    <hr>
+                    {% for t in el.task.all %}
+                        <p>{{ t.name }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>You have no goal</p>
+        {% endif %}
+         <center><a href="{% url 'main:create_purpose' %}" class="btn btn-light" role="button">+</a></center>
+    </div>
+{% endblock %}

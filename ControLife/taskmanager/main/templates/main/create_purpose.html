@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+    Create a goal
+{% endblock %}
+
+{% block content %}
+    <h1>Create a goal</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label  class="form-label">Name:</label>
+        <div class="mb-3">
+            {{ form.name }}
+        </div>
+        <label  class="form-label">Task:</label>
+        <div class="mb-3">
+            {{ form.task }}
+            <a href="{% url 'main:create_task' %}"><img src="{% static 'main/img/add.svg' %}" alt="Add"></a>
+        </div>
+        <label  class="form-label">Data:</label>
+        <div class="mb-3">
+            {{ form.planed }}
+        </div>
+        <button type="submit" class="btn btn-success">Add</button>
+        <a href="{% url 'main:purpose' %}" class="btn btn-success" role="button">Purpose</a>
+         <span>{{ error }}</span>
+    </form>
+{% endblock %}
